@@ -204,3 +204,22 @@ button {
 .item-footer:hover {
     color: #FFFFFF;
 }
+
+.form-kalkulator {
+    border-radius: 10px;
+    background-color:#FFFFFF;
+    max-width: 280px;
+    border-style: solid;
+    border-color: #03256c;
+}
+
+.col-form-label {
+    color: #03256c;
+}
+
+.bt-save {
+    padding: 10px 30px;
+    font-size: small;
+    background-color: green;
+    color:#FFFFFF;
+}
