@@ -24,7 +24,7 @@
   </head>
   <body>
     
-    <!--section 1-->
+    
     <!--navbar-->
     <div class="container-fluid section1" style="background-image: url('images/bgocean.jpg');">
     <nav class="navbar navbar-expand-lg py-5">
@@ -59,6 +59,7 @@
         </div>   
     </nav>
 
+    <!--section 1-->
     <div class="px-4 py-5 my-5 text-center">
         
         <h1 class="fdisplay-5 save">Save The Ocean</h1>
@@ -193,40 +194,44 @@
   <!--kalkulator sampah plastik-->
   <div class="container-fluid kalkulator">
     <div class="container">
-        <h2 align="center">Kalkulator Sampah Plastik</h2>
-        <p>Dalam 1 hari berapa banyak anda berkontribusi terhadap sampah plastik?</p>
+        <h2 align="center" style="color: #06BEE1;">Kalkulator Sampah Plastik</h2><br>
+        <p style="color: #03256c;">Dalam 1 hari, berapa banyak anda berkontribusi terhadap sampah plastik?</p>
         <form>
-          <table>
-            <tr>
-                <td width="200">Botol Plastik</td>
-                <td><input type="number" id="botol"></td>
-            </tr>
-            <tr>
-                <td>Sedotan</td>
-                <td><input type="number" id="sedotan"></td>
-            </tr>
-            <tr>
-                <td>Puntung Rokok</td>
-                <td><input type="number" id="rokok"></td>
-            </tr>
-            
-            <tr>
-                <td>
-                  <button type="button" class="bt-section5" onclick="hitung()">Calculate</button>
-                </td>
-            </tr>
-            <tr>
-              <td>
-                <button type="button" class="bt-section5" onclick="">Add Item</button>
-              </td>
-          </tr>
-        </table>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Botol Plastik</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-kalkulator" id="1" >
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Plastik</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-kalkulator" id="2">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Puntung Rokok</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-kalkulator" id="3">
+                </div>
+            </div>
+
+            <div id="container-sampah"></div>
+
+                <button type="button" class="bt-section5" onclick="Calculate()">Calculate</button>
+                <br>
+                <button type="button" class="bt-section5" onclick="Add()">Add Item</button>
+             
         </form>
 
-        <div id="total"></div>
+        <br>
+
+        <div id="add"></div>
+
+        <div id="result"></div>
         
     </div>
-</div>
+  </div>
 
   <!--section 5-->
   <div class="section5">
@@ -312,23 +317,31 @@
         outmessage.innerHTML = "<br>" + "I want to say about:" + "<br>" + "<b>"+message+"</b>";
       }
 
-      function hitung() {
-
-
-        var botol = parseFloat(document.getElementById("botol").value);
-        
-        var sedotan = parseFloat(document.getElementById("sedotan").value);
-        
-        var rokok = parseFloat(document.getElementById("rokok").value);
-
-        var hasil = (sedotan + botol + rokok) * 365;
-        
-        
-        total.innerHTML = "<br>" + "<b>Total sampah per-tahun</b>: " + "<b>"+hasil+"</b>";
-
-        
-        
+      const daftar_id = ["1", "2", "3"]
+  
+      function Calculate() {
+        var jumlah = 0;
+        for (var i=0; i<daftar_id.length; i++) {
+          jumlah += +document.getElementById(daftar_id[i]).value;
+        }
+        var result = document.getElementById("result");
+        jumlah *= 365
+        result.innerHTML = "<br>" + "<b>Total sampah per-tahun</b>: " + "<b>"+jumlah+"</b>";
       }
+
+      function Add() {
+        var add_section = document.getElementById("add");
+        add_section.innerHTML = '<input class="form-control form_add" type="text" placeholder="" aria-label=".form-control-sm example" id="Adder"><button type="button" class="bt-save" onclick="Save()">Save</button>'
+      }
+
+      function Save() {
+        var counter = 4;
+        var container = document.getElementById("container-sampah");
+        container.innerHTML += '<div class="row mb-3"><label class="col-sm-2 col-form-label">' + document.getElementById("Adder").value + '</label><div class="col-sm-10"><input type="text" class="form-kalkulator" id="'+ counter + '"></div></div>'
+        daftar_id.push(String(counter));
+        counter++
+      }
+
     </script>
   
   </body>
